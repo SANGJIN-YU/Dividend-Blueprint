@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dividend Blueprint</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="page-header">
+      <h1>Dividend Blueprint</h1>
+      <p class="subtitle">배당 ETF 재투자 시뮬레이터</p>
+    </header>
+
+    <main class="layout">
+      <section class="card form-card" aria-labelledby="form-heading">
+        <h2 id="form-heading">시뮬레이션 입력</h2>
+
+        <form id="simulation-form" novalidate>
+          <label class="field">
+            <span>ETF</span>
+            <select id="etf-select" required></select>
+          </label>
+
+          <label class="field">
+            <span>초기 투자금 (원)</span>
+            <input type="number" id="initial-investment" min="0" step="10000" value="10000000" required />
+          </label>
+
+          <label class="field">
+            <span>월 적립금 (원)</span>
+            <input type="number" id="monthly-contribution" min="0" step="10000" value="500000" required />
+          </label>
+
+          <label class="field">
+            <span>투자 기간 (년)</span>
+            <input type="number" id="investment-years" min="1" max="50" value="10" required />
+          </label>
+
+          <label class="field">
+            <span>연 배당률 (%)</span>
+            <input type="number" id="expected-return" min="0.1" max="20" step="0.1" value="3.5" required />
+          </label>
+
+          <fieldset class="field policy-field">
+            <legend>배당 정책</legend>
+            <label class="radio">
+              <input type="radio" name="dividend-policy" value="growing" checked />
+              <span>성장형 <em>(매년 배당률 +5%)</em></span>
+            </label>
+            <label class="radio">
+              <input type="radio" name="dividend-policy" value="fixed" />
+              <span>고정형</span>
+            </label>
+          </fieldset>
+
+          <button type="submit" class="btn-primary" id="submit-btn">시뮬레이션 실행</button>
+        </form>
+
+        <p id="form-message" class="form-message" role="alert" hidden></p>
+      </section>
+
+      <section class="results" id="results" hidden aria-labelledby="results-heading">
+        <h2 id="results-heading" class="sr-only">결과</h2>
+
+        <div class="stat-row">
+          <div class="stat-tile">
+            <span class="stat-label">최종 자산</span>
+            <span class="stat-value" id="stat-final-asset">-</span>
+          </div>
+          <div class="stat-tile">
+            <span class="stat-label">누적 배당금</span>
+            <span class="stat-value" id="stat-total-dividend">-</span>
+          </div>
+        </div>
+
+        <figure class="chart-card">
+          <figcaption>
+            <span class="chart-title">연도별 자산 추이</span>
+            <button type="button" class="table-toggle" data-target="asset">표로 보기</button>
+          </figcaption>
+          <div class="chart-wrap" id="asset-chart-wrap">
+            <svg id="asset-chart" class="chart" viewBox="0 0 640 320" role="img" aria-label="연도별 자산 추이 라인 차트"></svg>
+            <div class="tooltip" id="asset-tooltip" hidden></div>
+          </div>
+          <div class="table-view" id="asset-table" hidden></div>
+        </figure>
+
+        <figure class="chart-card">
+          <figcaption>
+            <span class="chart-title">연도별 배당금</span>
+            <button type="button" class="table-toggle" data-target="dividend">표로 보기</button>
+          </figcaption>
+          <div class="chart-wrap" id="dividend-chart-wrap">
+            <svg id="dividend-chart" class="chart" viewBox="0 0 640 320" role="img" aria-label="연도별 배당금 막대 차트"></svg>
+            <div class="tooltip" id="dividend-tooltip" hidden></div>
+          </div>
+          <div class="table-view" id="dividend-table" hidden></div>
+        </figure>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
