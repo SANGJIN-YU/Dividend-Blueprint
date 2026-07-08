@@ -15,8 +15,9 @@ services:
       - key: PYTHON_VERSION
         value: 3.11.9
 
-  - type: static
+  - type: web
     name: dividend-blueprint-frontend
+    env: static
     rootDir: frontend
     buildCommand: >-
       echo "window.API_BASE = \"https://$API_BASE_HOST/api/v1\";" > config.js
