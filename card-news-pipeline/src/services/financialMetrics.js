@@ -113,8 +113,12 @@ export async function fetchQuarterlyMetrics({ corpCode, endYear, endQuarter, fsD
   const latestList = await getCumulativeReport(endYear, endQuarter);
   const totalLiabilities = extractAmount(latestList, 'totalLiabilities');
   const totalEquity = extractAmount(latestList, 'totalEquity');
+  // totalEquity === 0(실제 값)과 totalEquity === null(결측)을 구분한다.
+  // 0으로 나누기만 별도로 방지하고, 음수 자본(자본잠식) 등 다른 실제 값은 그대로 계산한다.
   const debtRatio =
-    totalLiabilities !== null && totalEquity ? (totalLiabilities / totalEquity) * 100 : null;
+    totalLiabilities !== null && totalEquity !== null && totalEquity !== 0
+      ? (totalLiabilities / totalEquity) * 100
+      : null;
 
   const cumulativeRevenueThis = extractAmount(latestList, 'revenue', 'thstrm_amount');
   const cumulativeRevenuePrior = extractAmount(latestList, 'revenue', 'frmtrm_amount');

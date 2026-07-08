@@ -54,22 +54,42 @@ function buildInlineSvgChart(metrics) {
   const width = 900;
   const height = 400;
   const padding = 60;
-  const values = metrics.quarters.flatMap((q) => [q.revenue ?? 0, q.operatingProfit ?? 0]);
-  const maxValue = Math.max(1, ...values);
+  // 실제 데이터(정)/공백(null)/영업손실(부) 세 가지를 모두 정확히 표현하기 위해
+  // 0을 기준선(zeroY)으로 두고 위(양수)/아래(음수)로 막대를 그린다.
+  // null 값은 QuickChart(Chart.js)의 null=공백 처리와 동일하게 막대를 그리지 않는다.
+  const plotTop = 50;
+  const plotBottom = height - padding;
+  const negativeReserveRatio = 0.15; // 하단 15%를 음수(영업손실 등) 표현 영역으로 예약
+  const zeroY = plotTop + (plotBottom - plotTop) * (1 - negativeReserveRatio);
+  const positiveSpan = zeroY - plotTop;
+  const negativeSpan = plotBottom - zeroY;
+
+  const definedValues = metrics.quarters
+    .flatMap((q) => [q.revenue, q.operatingProfit])
+    .filter((v) => v !== null);
+  const maxPositive = Math.max(1, ...definedValues.filter((v) => v > 0));
+  const maxNegativeAbs = Math.max(1, ...definedValues.filter((v) => v < 0).map((v) => Math.abs(v)));
+
   const groupWidth = (width - padding * 2) / metrics.quarters.length;
   const barWidth = groupWidth / 3;
+
+  function barRect(x, value, color) {
+    if (value === null) return '';
+    if (value >= 0) {
+      const barHeight = (value / maxPositive) * positiveSpan;
+      return `<rect x="${x}" y="${zeroY - barHeight}" width="${barWidth}" height="${barHeight}" fill="${color}" />`;
+    }
+    const barHeight = (Math.abs(value) / maxNegativeAbs) * negativeSpan;
+    return `<rect x="${x}" y="${zeroY}" width="${barWidth}" height="${barHeight}" fill="${color}" />`;
+  }
 
   const bars = metrics.quarters
     .map((q, i) => {
       const groupX = padding + i * groupWidth;
-      const revenueHeight = ((q.revenue ?? 0) / maxValue) * (height - padding * 2);
-      const profitHeight = ((q.operatingProfit ?? 0) / maxValue) * (height - padding * 2);
-      const revenueY = height - padding - revenueHeight;
-      const profitY = height - padding - profitHeight;
       return `
-        <rect x="${groupX + barWidth * 0.5}" y="${revenueY}" width="${barWidth}" height="${revenueHeight}" fill="#4C6EF5" />
-        <rect x="${groupX + barWidth * 1.6}" y="${profitY}" width="${barWidth}" height="${profitHeight}" fill="#12B886" />
-        <text x="${groupX + groupWidth / 2}" y="${height - padding + 24}" font-size="18" text-anchor="middle" fill="#333">${q.label}</text>
+        ${barRect(groupX + barWidth * 0.5, q.revenue, '#4C6EF5')}
+        ${barRect(groupX + barWidth * 1.6, q.operatingProfit, '#12B886')}
+        <text x="${groupX + groupWidth / 2}" y="${plotBottom + 24}" font-size="18" text-anchor="middle" fill="#333">${q.label}</text>
       `;
     })
     .join('');
@@ -78,6 +98,7 @@ function buildInlineSvgChart(metrics) {
     <svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">
       <rect width="${width}" height="${height}" fill="white" />
       <text x="${width / 2}" y="30" font-size="22" text-anchor="middle" fill="#222">최근 4개 분기 추이 (최근 공시 기준)</text>
+      <line x1="${padding}" y1="${zeroY}" x2="${width - padding}" y2="${zeroY}" stroke="#ccc" stroke-width="1" />
       ${bars}
       <rect x="${width - 260}" y="14" width="14" height="14" fill="#4C6EF5" />
       <text x="${width - 240}" y="26" font-size="16" fill="#333">매출액</text>

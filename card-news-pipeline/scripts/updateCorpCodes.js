@@ -30,7 +30,9 @@ async function main() {
   }
   const xml = entry.getData().toString('utf-8');
 
-  const parser = new XMLParser();
+  // parseTagValue: false 로 값 자동 숫자/불리언 변환을 꺼서 "005930" 같은 0으로 시작하는
+  // stock_code/corp_code 가 숫자로 변환되어 앞자리 0이 사라지는 것을 방지한다.
+  const parser = new XMLParser({ parseTagValue: false });
   const parsed = parser.parse(xml);
   const list = parsed?.result?.list ?? [];
 

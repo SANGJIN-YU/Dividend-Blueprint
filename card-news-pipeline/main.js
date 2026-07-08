@@ -23,7 +23,10 @@ async function main() {
       results.succeeded.push({ company: company.companyName, imagePath });
     } catch (error) {
       // 개별 기업 실패가 전체 배치를 막지 않도록 스킵하고 계속 진행한다 (리스크 대응: 데이터 결측 시 자동 스킵).
-      logger.error(`${company.companyName} 파이프라인 실패, 스킵합니다`, { error: error.message });
+      logger.error(`${company.companyName} 파이프라인 실패, 스킵합니다`, {
+        error: error.message,
+        stack: error.stack,
+      });
       results.failed.push({ company: company.companyName, error: error.message });
     }
   }
@@ -46,6 +49,6 @@ async function main() {
 }
 
 main().catch((error) => {
-  logger.error('파이프라인 실행 중 처리되지 않은 오류', { error: error.message });
+  logger.error('파이프라인 실행 중 처리되지 않은 오류', { error: error.message, stack: error.stack });
   process.exitCode = 1;
 });

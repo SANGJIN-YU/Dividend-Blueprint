@@ -31,9 +31,11 @@ export async function runPipelineForCompany({ stockCode, companyName }) {
     endQuarter: quarter,
   });
 
-  const hasRequiredData =
-    metrics.quarters[metrics.quarters.length - 1].revenue !== null &&
-    metrics.quarters[metrics.quarters.length - 1].operatingProfit !== null;
+  // 차트에는 4개 분기가 모두 표시되므로, 최신 분기뿐 아니라 모든 분기의 데이터가
+  // 있어야 결측치가 없는 것으로 본다 (그렇지 않으면 이전 분기 결측이 차트에 0으로 표시될 수 있음).
+  const hasRequiredData = metrics.quarters.every(
+    (q) => q.revenue !== null && q.operatingProfit !== null
+  );
   if (!hasRequiredData) {
     throw new Error(`${companyName} 필수 재무 지표 결측으로 스킵합니다 (${year} Q${quarter})`);
   }

@@ -15,12 +15,22 @@ export async function selectTopicCompanies({
 } = {}) {
   const mentioned = await fetchTopMentionedCompanies({ limit: candidatePoolSize });
 
-  const withPriceChange = await Promise.all(
+  // 개별 기업의 주가 조회 실패가 전체 선정 과정을 중단시키지 않도록, 실패한 기업은
+  // 후보에서만 제외하고 나머지 기업으로 계속 진행한다 (리스크 대응: 결측/오류 시 자동 스킵).
+  const withPriceChangeResults = await Promise.all(
     mentioned.map(async (company) => {
-      const changeRate = await fetchPriceChangeRate(company.stockCode);
-      return { ...company, changeRate };
+      try {
+        const changeRate = await fetchPriceChangeRate(company.stockCode);
+        return { ...company, changeRate };
+      } catch (error) {
+        logger.warn(`주가 등락률 조회 실패, 후보에서 제외합니다: ${company.companyName}`, {
+          error: error.message,
+        });
+        return null;
+      }
     })
   );
+  const withPriceChange = withPriceChangeResults.filter((company) => company !== null);
 
   const filtered = withPriceChange.filter(
     (company) => Math.abs(company.changeRate) >= minAbsChangeRate

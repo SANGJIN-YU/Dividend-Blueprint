@@ -42,14 +42,23 @@ export async function generateNarrative({ companyName, metrics }) {
   return generateText({ system: SYSTEM_PROMPT, prompt });
 }
 
+/** changeRate가 null(데이터 없음)이면 증가/감소를 단정하지 않는다. */
+function buildYoySentence(label, amountText, changeRate) {
+  if (changeRate === null) {
+    return `${label}은 ${amountText}로, 누적 기준 전년동기 대비 증감률은 확인되지 않았습니다.`;
+  }
+  const trend = changeRate >= 0 ? '증가' : '감소';
+  return `${label}은 ${amountText}로 누적 기준 전년동기 대비 ${formatChangeRate(changeRate)} ${trend}했습니다.`;
+}
+
 /** API 키가 없는 mock/데모 실행을 위한 규칙 기반 대체 서사문 (LLM 미사용). */
 function buildFallbackNarrative({ companyName, metrics }) {
   const latest = metrics.quarters[metrics.quarters.length - 1];
-  const revenueTrend = metrics.yoy.revenueChangeRate >= 0 ? '증가' : '감소';
-  const profitTrend = metrics.yoy.operatingProfitChangeRate >= 0 ? '증가' : '감소';
-  return (
-    `최근 공시 기준 ${companyName}의 ${latest.label} 매출액은 ${formatToEokwon(latest.revenue)}로 ` +
-    `누적 기준 전년동기 대비 ${formatChangeRate(metrics.yoy.revenueChangeRate)} ${revenueTrend}했습니다. ` +
-    `영업이익은 ${formatToEokwon(latest.operatingProfit)}로 전년동기 대비 ${formatChangeRate(metrics.yoy.operatingProfitChangeRate)} ${profitTrend}했습니다.`
+  const revenueSentence = buildYoySentence('매출액', formatToEokwon(latest.revenue), metrics.yoy.revenueChangeRate);
+  const profitSentence = buildYoySentence(
+    '영업이익',
+    formatToEokwon(latest.operatingProfit),
+    metrics.yoy.operatingProfitChangeRate
   );
+  return `최근 공시 기준 ${companyName}의 ${latest.label} ${revenueSentence} ${profitSentence}`;
 }
