@@ -1,0 +1,53 @@
+name: Card News Daily Pipeline
+
+on:
+  schedule:
+    # 매일 08:30 KST (UTC 23:30 전날)
+    - cron: "30 23 * * *"
+  workflow_dispatch: {}
+
+jobs:
+  run-pipeline:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: card-news-pipeline
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+          cache-dependency-path: card-news-pipeline/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Cache auto-installed Chromium
+        uses: actions/cache@v4
+        with:
+          path: card-news-pipeline/.chromium-cache
+          key: chromium-${{ runner.os }}
+
+      - name: Run pipeline
+        # PUPPETEER_EXECUTABLE_PATH를 지정하지 않으면 src/util/chromium.js가
+        # .chromium-cache 에 Chromium을 자동 설치해 사용한다 (로컬 샌드박스 전용 경로는 여기 없음).
+        env:
+          DART_API_KEY: ${{ secrets.DART_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          NEWS_API_KEY: ${{ secrets.NEWS_API_KEY }}
+          NEWS_API_PROVIDER: ${{ vars.NEWS_API_PROVIDER || 'mock' }}
+          STOCK_API_KEY: ${{ secrets.STOCK_API_KEY }}
+          STOCK_API_PROVIDER: ${{ vars.STOCK_API_PROVIDER || 'mock' }}
+        run: node main.js
+
+      - name: Upload review output (image + data) as artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: card-news-output-${{ github.run_number }}
+          path: |
+            card-news-pipeline/output/
+            card-news-pipeline/logs/
+          retention-days: 14

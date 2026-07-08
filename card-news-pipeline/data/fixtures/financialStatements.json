@@ -1,0 +1,32 @@
+{
+  "00000001-2025-11013": [
+    { "sj_div": "IS", "account_nm": "매출액", "thstrm_amount": "3,000,000,000,000", "frmtrm_amount": "2,700,000,000,000" },
+    { "sj_div": "IS", "account_nm": "영업이익", "thstrm_amount": "250,000,000,000", "frmtrm_amount": "210,000,000,000" },
+    { "sj_div": "BS", "account_nm": "부채총계", "thstrm_amount": "42,000,000,000,000" },
+    { "sj_div": "BS", "account_nm": "자본총계", "thstrm_amount": "85,000,000,000,000" }
+  ],
+  "00000001-2025-11012": [
+    { "sj_div": "IS", "account_nm": "매출액", "thstrm_amount": "6,200,000,000,000", "frmtrm_amount": "5,600,000,000,000" },
+    { "sj_div": "IS", "account_nm": "영업이익", "thstrm_amount": "520,000,000,000", "frmtrm_amount": "430,000,000,000" },
+    { "sj_div": "BS", "account_nm": "부채총계", "thstrm_amount": "43,000,000,000,000" },
+    { "sj_div": "BS", "account_nm": "자본총계", "thstrm_amount": "86,500,000,000,000" }
+  ],
+  "00000001-2025-11014": [
+    { "sj_div": "IS", "account_nm": "매출액", "thstrm_amount": "9,500,000,000,000", "frmtrm_amount": "8,600,000,000,000" },
+    { "sj_div": "IS", "account_nm": "영업이익", "thstrm_amount": "810,000,000,000", "frmtrm_amount": "660,000,000,000" },
+    { "sj_div": "BS", "account_nm": "부채총계", "thstrm_amount": "44,000,000,000,000" },
+    { "sj_div": "BS", "account_nm": "자본총계", "thstrm_amount": "88,000,000,000,000" }
+  ],
+  "00000001-2025-11011": [
+    { "sj_div": "IS", "account_nm": "매출액", "thstrm_amount": "13,000,000,000,000", "frmtrm_amount": "11,700,000,000,000" },
+    { "sj_div": "IS", "account_nm": "영업이익", "thstrm_amount": "1,100,000,000,000", "frmtrm_amount": "900,000,000,000" },
+    { "sj_div": "BS", "account_nm": "부채총계", "thstrm_amount": "44,500,000,000,000" },
+    { "sj_div": "BS", "account_nm": "자본총계", "thstrm_amount": "89,000,000,000,000" }
+  ],
+  "00000001-2026-11013": [
+    { "sj_div": "IS", "account_nm": "매출액", "thstrm_amount": "3,300,000,000,000", "frmtrm_amount": "3,000,000,000,000" },
+    { "sj_div": "IS", "account_nm": "영업이익", "thstrm_amount": "300,000,000,000", "frmtrm_amount": "250,000,000,000" },
+    { "sj_div": "BS", "account_nm": "부채총계", "thstrm_amount": "45,000,000,000,000" },
+    { "sj_div": "BS", "account_nm": "자본총계", "thstrm_amount": "90,000,000,000,000" }
+  ]
+}
