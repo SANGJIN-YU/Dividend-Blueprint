@@ -1,0 +1,23 @@
+{
+  "name": "card-news-pipeline",
+  "version": "0.1.0",
+  "private": true,
+  "description": "기업 재무지표 서사화 카드뉴스 자동 생성 파이프라인 (MVP)",
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node main.js",
+    "demo": "MOCK_MODE=true node main.js",
+    "update-corp-codes": "node scripts/updateCorpCodes.js",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "@puppeteer/browsers": "^2.4.1",
+    "adm-zip": "^0.5.16",
+    "dotenv": "^16.4.5",
+    "fast-xml-parser": "^4.5.0",
+    "puppeteer-core": "^23.9.0"
+  }
+}

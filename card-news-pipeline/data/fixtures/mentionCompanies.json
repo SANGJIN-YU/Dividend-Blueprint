@@ -1,0 +1,6 @@
+[
+  { "stockCode": "000001", "companyName": "샘플전자", "mentionCount": 452 },
+  { "stockCode": "000002", "companyName": "샘플바이오", "mentionCount": 318 },
+  { "stockCode": "000003", "companyName": "샘플플랫폼", "mentionCount": 201 },
+  { "stockCode": "000004", "companyName": "샘플에너지", "mentionCount": 97 }
+]

@@ -1,0 +1,17 @@
+[
+  {
+    "corp_code": "00000001",
+    "corp_name": "샘플전자",
+    "stock_code": "000001"
+  },
+  {
+    "corp_code": "00000002",
+    "corp_name": "샘플바이오",
+    "stock_code": "000002"
+  },
+  {
+    "corp_code": "00000003",
+    "corp_name": "샘플플랫폼",
+    "stock_code": "000003"
+  }
+]

@@ -1,0 +1,7 @@
+node_modules/
+.env
+data/corpCodes.json
+output/*
+!output/.gitkeep
+logs/*.log
+.chromium-cache/
