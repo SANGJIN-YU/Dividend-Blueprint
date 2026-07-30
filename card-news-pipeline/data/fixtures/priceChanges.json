@@ -1,6 +1,0 @@
-[
-  { "stockCode": "000001", "changeRate": 3.8 },
-  { "stockCode": "000002", "changeRate": -4.2 },
-  { "stockCode": "000003", "changeRate": 0.4 },
-  { "stockCode": "000004", "changeRate": 2.1 }
-]
