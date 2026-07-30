@@ -196,20 +196,6 @@ function renderDetail(facility, summary, reviews) {
     </dl>
     ${facility.placeUrl ? `<a class="place-link" href="${facility.placeUrl}" target="_blank" rel="noopener">카카오맵에서 보기 ↗</a>` : ''}
 
-    <div class="section-title">이용권 가격 / 휴무일 정보 수정</div>
-    <form class="edit-info-form" id="info-form">
-      <label>일일 이용권 가격 (원)
-        <input type="number" name="dailyPassPrice" min="0" value="${info.dailyPassPrice ?? ''}" placeholder="예: 15000" />
-      </label>
-      <label>휴무일
-        <input type="text" name="closedDays" value="${info.closedDays ?? ''}" placeholder="예: 매주 월요일" />
-      </label>
-      <label>비고
-        <textarea name="notes" rows="2" placeholder="샤워실, 락커, 예약 방법 등">${info.notes ?? ''}</textarea>
-      </label>
-      <button type="submit">정보 저장</button>
-    </form>
-
     <div class="section-title">리뷰 (${summary.count})</div>
     <div class="review-summary">
       <span class="avg">${summary.average ?? '-'}</span>
@@ -234,74 +220,7 @@ function renderDetail(facility, summary, reviews) {
               .join('')
       }
     </div>
-
-    <form class="review-form" id="review-form">
-      <div class="review-form-row">
-        <input type="text" name="author" placeholder="닉네임 (선택)" />
-        <select name="rating">
-          <option value="5">★★★★★ (5)</option>
-          <option value="4">★★★★☆ (4)</option>
-          <option value="3">★★★☆☆ (3)</option>
-          <option value="2">★★☆☆☆ (2)</option>
-          <option value="1">★☆☆☆☆ (1)</option>
-        </select>
-      </div>
-      <textarea name="comment" placeholder="이용 후기를 남겨주세요" required></textarea>
-      <button type="submit">리뷰 등록</button>
-    </form>
   `;
-
-  document.getElementById('info-form').addEventListener('submit', (e) => handleInfoSubmit(e, facility.id));
-  document.getElementById('review-form').addEventListener('submit', (e) => handleReviewSubmit(e, facility.id));
-}
-
-async function handleInfoSubmit(e, facilityId) {
-  e.preventDefault();
-  const form = new FormData(e.target);
-  const dailyPassPrice = form.get('dailyPassPrice') ? Number(form.get('dailyPassPrice')) : null;
-  const closedDays = form.get('closedDays') || null;
-  const notes = form.get('notes') || null;
-
-  try {
-    const updated = await fetchJSON(`/api/facilities/${facilityId}/info`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ dailyPassPrice, closedDays, notes }),
-    });
-    const facility = state.facilities.find((f) => f.id === facilityId);
-    if (facility) {
-      facility.info = updated;
-      renderList(state.facilities);
-    }
-    selectFacility(facilityId);
-  } catch (err) {
-    alert(`저장 실패: ${err.message}`);
-  }
-}
-
-async function handleReviewSubmit(e, facilityId) {
-  e.preventDefault();
-  const form = new FormData(e.target);
-
-  try {
-    const { summary } = await fetchJSON(`/api/facilities/${facilityId}/reviews`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        author: form.get('author'),
-        rating: Number(form.get('rating')),
-        comment: form.get('comment'),
-      }),
-    });
-    const facility = state.facilities.find((f) => f.id === facilityId);
-    if (facility) {
-      facility.reviewSummary = summary;
-      renderList(state.facilities);
-    }
-    selectFacility(facilityId);
-  } catch (err) {
-    alert(`리뷰 등록 실패: ${err.message}`);
-  }
 }
 
 // ---------- Events ----------

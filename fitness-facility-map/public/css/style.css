@@ -247,43 +247,6 @@ body {
   border-top: 1px solid var(--border);
 }
 
-.edit-info-form {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  background: #f7f8fa;
-  padding: 12px;
-  border-radius: 8px;
-}
-
-.edit-info-form label {
-  font-size: 12px;
-  color: var(--muted);
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.edit-info-form input,
-.edit-info-form textarea {
-  padding: 6px 8px;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  font-size: 13px;
-  font-family: inherit;
-}
-
-.edit-info-form button {
-  align-self: flex-start;
-  padding: 6px 14px;
-  border: none;
-  border-radius: 6px;
-  background: var(--primary);
-  color: white;
-  cursor: pointer;
-  font-size: 13px;
-}
-
 .review-summary {
   display: flex;
   align-items: baseline;
@@ -325,50 +288,6 @@ body {
 .review-item .comment {
   font-size: 13px;
   line-height: 1.5;
-}
-
-.review-form {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-top: 12px;
-}
-
-.review-form-row {
-  display: flex;
-  gap: 8px;
-}
-
-.review-form input[type='text'] {
-  flex: 1;
-  padding: 6px 8px;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-}
-
-.review-form select {
-  padding: 6px 8px;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-}
-
-.review-form textarea {
-  padding: 6px 8px;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  font-family: inherit;
-  resize: vertical;
-  min-height: 60px;
-}
-
-.review-form button {
-  align-self: flex-end;
-  padding: 6px 16px;
-  border: none;
-  border-radius: 6px;
-  background: var(--primary);
-  color: white;
-  cursor: pointer;
 }
 
 .empty-state,
