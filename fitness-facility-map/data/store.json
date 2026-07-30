@@ -1,0 +1,117 @@
+{
+  "facilityInfo": {
+    "demo-1": {
+      "dailyPassPrice": 15000,
+      "closedDays": "연중무휴",
+      "notes": "샤워실, 락커 무료 제공. 일일권은 현장 결제만 가능.",
+      "updatedAt": "2026-07-01T00:00:00.000Z"
+    },
+    "demo-2": {
+      "dailyPassPrice": 30000,
+      "closedDays": "매주 일요일",
+      "notes": "1:1 체험 수업 예약 필수, 운동복 대여 가능.",
+      "updatedAt": "2026-07-01T00:00:00.000Z"
+    },
+    "demo-3": {
+      "dailyPassPrice": 25000,
+      "closedDays": "매주 월요일",
+      "notes": "드롭인은 오픈짐 시간에만 가능(평일 10-13시, 20-22시).",
+      "updatedAt": "2026-07-01T00:00:00.000Z"
+    },
+    "demo-4": {
+      "dailyPassPrice": 8000,
+      "closedDays": "매월 둘째·넷째 화요일",
+      "notes": "수모, 수경 개인 지참 필수.",
+      "updatedAt": "2026-07-01T00:00:00.000Z"
+    },
+    "demo-5": {
+      "dailyPassPrice": 20000,
+      "closedDays": "매주 일요일, 공휴일",
+      "notes": "매트 무료 대여, 예약제로 운영.",
+      "updatedAt": "2026-07-01T00:00:00.000Z"
+    },
+    "demo-6": {
+      "dailyPassPrice": 12000,
+      "closedDays": "연중무휴(24시간)",
+      "notes": "새벽 시간대는 무인 운영.",
+      "updatedAt": "2026-07-01T00:00:00.000Z"
+    }
+  },
+  "reviews": {
+    "demo-1": [
+      {
+        "id": "seed-1",
+        "author": "지민",
+        "rating": 5,
+        "comment": "기구가 최신이고 넓어서 좋아요.",
+        "createdAt": "2026-06-20T09:00:00.000Z"
+      },
+      {
+        "id": "seed-2",
+        "author": "현우",
+        "rating": 4,
+        "comment": "주말엔 사람이 좀 많아요.",
+        "createdAt": "2026-06-25T09:00:00.000Z"
+      }
+    ],
+    "demo-2": [
+      {
+        "id": "seed-3",
+        "author": "수정",
+        "rating": 5,
+        "comment": "강사님이 꼼꼼하게 봐주셔서 좋았어요.",
+        "createdAt": "2026-06-18T09:00:00.000Z"
+      }
+    ],
+    "demo-3": [
+      {
+        "id": "seed-4",
+        "author": "태윤",
+        "rating": 4,
+        "comment": "분위기 좋고 커뮤니티가 활발해요.",
+        "createdAt": "2026-06-15T09:00:00.000Z"
+      },
+      {
+        "id": "seed-5",
+        "author": "하은",
+        "rating": 3,
+        "comment": "초보자에겐 조금 어려울 수 있어요.",
+        "createdAt": "2026-06-22T09:00:00.000Z"
+      }
+    ],
+    "demo-4": [
+      {
+        "id": "seed-6",
+        "author": "민서",
+        "rating": 4,
+        "comment": "물이 깨끗하고 레인이 여유로워요.",
+        "createdAt": "2026-06-10T09:00:00.000Z"
+      }
+    ],
+    "demo-5": [
+      {
+        "id": "seed-7",
+        "author": "예린",
+        "rating": 5,
+        "comment": "소규모라 집중이 잘 돼요.",
+        "createdAt": "2026-06-28T09:00:00.000Z"
+      }
+    ],
+    "demo-6": [
+      {
+        "id": "seed-8",
+        "author": "동현",
+        "rating": 3,
+        "comment": "가성비는 좋은데 관리가 아쉬워요.",
+        "createdAt": "2026-06-12T09:00:00.000Z"
+      },
+      {
+        "id": "seed-9",
+        "author": "소연",
+        "rating": 4,
+        "comment": "24시간이라 퇴근 후 가기 편해요.",
+        "createdAt": "2026-06-30T09:00:00.000Z"
+      }
+    ]
+  }
+}

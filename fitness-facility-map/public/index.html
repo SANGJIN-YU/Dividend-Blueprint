@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>운동시설 지도</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <div id="app">
+      <header class="topbar">
+        <h1>🏋️ 운동시설 지도</h1>
+        <form id="search-form" class="search-form">
+          <input
+            id="search-input"
+            type="text"
+            placeholder="헬스장, 필라테스, 수영장, 요가 ..."
+            autocomplete="off"
+          />
+          <button type="submit">검색</button>
+          <button type="button" id="locate-btn" title="내 위치 근처에서 검색">📍 내 위치</button>
+        </form>
+      </header>
+
+      <div id="demo-banner" class="demo-banner" hidden>
+        데모 데이터 모드입니다. <code>.env</code>에 <code>KAKAO_JS_KEY</code> /
+        <code>KAKAO_REST_API_KEY</code>를 설정하면 카카오 지도와 실제 장소 검색이 연동됩니다.
+      </div>
+
+      <main class="layout">
+        <section class="list-panel">
+          <ul id="facility-list" class="facility-list"></ul>
+        </section>
+
+        <section class="map-panel">
+          <div id="map"></div>
+        </section>
+
+        <aside id="detail-panel" class="detail-panel" hidden>
+          <button id="detail-close" class="detail-close" aria-label="닫기">✕</button>
+          <div id="detail-content"></div>
+        </aside>
+      </main>
+    </div>
+
+    <script src="/js/app.js"></script>
+  </body>
+</html>

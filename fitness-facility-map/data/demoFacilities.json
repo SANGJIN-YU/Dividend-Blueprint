@@ -1,0 +1,65 @@
+{
+  "_comment": "KAKAO_REST_API_KEY가 설정되지 않았을 때 사용되는 데모용 시설 목록입니다. 실제 상호가 아닌 예시 데이터이며, 실제 서비스에서는 카카오 로컬 API 검색 결과로 대체됩니다.",
+  "facilities": [
+    {
+      "id": "demo-1",
+      "name": "시청 스트롱 피트니스",
+      "category": "운동,헬스 > 헬스장",
+      "phone": "02-1234-5678",
+      "address": "서울 중구 세종대로 110",
+      "lat": 37.5663,
+      "lng": 126.9779,
+      "placeUrl": "https://map.kakao.com"
+    },
+    {
+      "id": "demo-2",
+      "name": "을지로 필라테스 스튜디오",
+      "category": "운동,헬스 > 필라테스",
+      "phone": "02-2345-6789",
+      "address": "서울 중구 을지로 30",
+      "lat": 37.5658,
+      "lng": 126.9915,
+      "placeUrl": "https://map.kakao.com"
+    },
+    {
+      "id": "demo-3",
+      "name": "남산 크로스핏 박스",
+      "category": "운동,헬스 > 크로스핏",
+      "phone": "02-3456-7890",
+      "address": "서울 중구 소파로 46",
+      "lat": 37.5512,
+      "lng": 126.9882,
+      "placeUrl": "https://map.kakao.com"
+    },
+    {
+      "id": "demo-4",
+      "name": "광화문 수영센터",
+      "category": "운동,헬스 > 수영장",
+      "phone": "02-4567-8901",
+      "address": "서울 종로구 세종대로 172",
+      "lat": 37.5720,
+      "lng": 126.9769,
+      "placeUrl": "https://map.kakao.com"
+    },
+    {
+      "id": "demo-5",
+      "name": "명동 요가 스튜디오",
+      "category": "운동,헬스 > 요가",
+      "phone": "02-5678-9012",
+      "address": "서울 중구 명동길 14",
+      "lat": 37.5636,
+      "lng": 126.9834,
+      "placeUrl": "https://map.kakao.com"
+    },
+    {
+      "id": "demo-6",
+      "name": "동대문 24시 헬스클럽",
+      "category": "운동,헬스 > 헬스장",
+      "phone": "02-6789-0123",
+      "address": "서울 중구 장충단로 247",
+      "lat": 37.5663,
+      "lng": 127.0095,
+      "placeUrl": "https://map.kakao.com"
+    }
+  ]
+}
