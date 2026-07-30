@@ -4,6 +4,9 @@
   "description": "지도 기반 운동 시설 검색 앱 - 이용권 가격, 휴무일, 리뷰를 한 곳에서 확인",
   "main": "server/index.js",
   "type": "commonjs",
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "start": "node server/index.js",
     "dev": "node --watch server/index.js",

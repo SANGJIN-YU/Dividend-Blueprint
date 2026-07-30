@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: fitness-facility-map
+    env: node
+    plan: free
+    rootDir: fitness-facility-map
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_VERSION
+        value: 22.22.2
+      - key: KAKAO_JS_KEY
+        sync: false
+      - key: KAKAO_REST_API_KEY
+        sync: false

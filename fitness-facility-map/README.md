@@ -27,8 +27,26 @@ npm start
 1. [카카오 개발자 콘솔](https://developers.kakao.com)에서 애플리케이션 생성
 2. **앱 키 > JavaScript 키** → `.env`의 `KAKAO_JS_KEY`
 3. **앱 키 > REST API 키** → `.env`의 `KAKAO_REST_API_KEY`
-4. **플랫폼 > Web** 에 서비스 도메인(예: `http://localhost:3000`) 등록
+4. **플랫폼 > Web** 에 서비스 도메인(예: `http://localhost:3000`, 배포 후에는 실제 배포 도메인도 함께) 등록
 5. 서버 재시작
+
+## 배포 (Render)
+
+저장소 루트의 `render.yaml`이 이 앱을 위한 Render Blueprint입니다.
+
+1. [Render 대시보드](https://dashboard.render.com) → **New +** → **Blueprint**
+2. 이 GitHub 저장소(`SANGJIN-YU/Dividend-Blueprint`) 연결
+3. Render가 `render.yaml`을 읽어 `fitness-facility-map` 웹 서비스를 자동 생성합니다
+   (`rootDir: fitness-facility-map`, `npm install` → `npm start`)
+4. 배포 전 환경변수 입력 화면에서 `KAKAO_JS_KEY`, `KAKAO_REST_API_KEY` 입력
+   (`sync: false`로 되어있어 Render가 값을 저장소에 커밋하지 않고 대시보드에서만 관리합니다)
+5. 배포가 끝나면 발급된 도메인을 카카오 개발자 콘솔의 **플랫폼 > Web**에도 등록해야
+   지도가 정상적으로 로드됩니다.
+
+**주의 (데이터 영속성)**: `data/store.json`은 파일 기반 저장소입니다. Render 무료 플랜은
+디스크가 영구 저장소가 아니라서, 재배포할 때마다 사용자가 입력한 이용권 가격/휴무일/리뷰가
+저장소에 커밋된 시드 데이터로 초기화됩니다. 운영 서비스로 쓰려면 Render의 유료 **Persistent
+Disk**를 `data/` 경로에 마운트하거나, PostgreSQL 같은 DB로 교체하는 걸 권장합니다.
 
 ## 주요 기능
 
